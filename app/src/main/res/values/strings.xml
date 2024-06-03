@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">challenge</string>
+    //App
+    <string name="app_name">Challenge</string>
+    //Search fragment
+    <string name="search_edit">Search in Mercado Libre</string>
+    <string name="search">Search</string>
 </resources>
