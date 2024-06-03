@@ -1,6 +1,37 @@
 package com.meli.challenge.search
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.meli.challenge.data.model.Product
+import com.meli.challenge.domain.GetProductsUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import java.net.HttpURLConnection
+import javax.inject.Inject
 
-class SearchViewModel : ViewModel() {
+@HiltViewModel
+class SearchViewModel @Inject constructor(
+    private val getProductsUseCase: GetProductsUseCase
+) : ViewModel() {
+    // Expose screen UI product
+    val productLiveData = MutableLiveData<ArrayList<Product>>()
+
+    /**
+     * get products
+     */
+    fun getProducts(nameProduct: String) {
+        viewModelScope.launch {
+            //loading.value = true
+            val response = getProductsUseCase.invoke(nameProduct)
+            if (response.httpCode == HttpURLConnection.HTTP_OK) {
+                response.body?.let { productLiveData.postValue(it) }
+                //loading.value = false
+               // _errorCode.value = null
+            } else {
+               // _errorCode.value = response.httpCode
+               // loading.value = false
+            }
+        }
+    }
 }

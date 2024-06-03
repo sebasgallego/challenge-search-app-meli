@@ -1,6 +1,8 @@
 <resources>
     //App
     <string name="app_name">Challenge</string>
+    <string name="error_internet">Failed to establish an internet connection please try again</string>
+    <string name="error_server">It seems that something went wrong, we are working to fix it</string>
     //Search fragment
     <string name="search_edit">Search in Mercado Libre</string>
     <string name="search">Search</string>
