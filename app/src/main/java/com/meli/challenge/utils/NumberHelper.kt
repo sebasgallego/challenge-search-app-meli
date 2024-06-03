@@ -1,4 +1,4 @@
-package com.challenge.meli.utils
+package com.meli.challenge.utils
 
 import java.math.RoundingMode
 import java.text.DecimalFormat

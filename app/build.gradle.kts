@@ -43,6 +43,8 @@ android {
 
 dependencies {
 
+    //Glide
+    implementation (libs.glide)
     //Retrofit
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
@@ -50,7 +52,6 @@ dependencies {
     //Dagger hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

@@ -6,4 +6,6 @@
     //Search fragment
     <string name="search_edit">Search in Mercado Libre</string>
     <string name="search">Search</string>
+    //List item product
+    <string name="lbl_available">Available:</string>
 </resources>
