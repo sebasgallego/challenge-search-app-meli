@@ -16,9 +16,10 @@ class ProductViewModel @Inject constructor(
 ) : ViewModel() {
     // Expose screen UI product
     val productLiveData = MutableLiveData<ArrayList<Product>>()
+
     //Loading
     val loading = MutableLiveData<Boolean>()
-     val errorCode = MutableLiveData<Int?>()
+    val errorCode = MutableLiveData<Int?>()
 
     /**
      * get products
@@ -28,7 +29,7 @@ class ProductViewModel @Inject constructor(
             loading.value = true
             val response = getProductsUseCase.invoke(nameProduct)
             if (response.httpCode == HttpURLConnection.HTTP_OK) {
-                response.body?.let { productLiveData.postValue(it) }
+                response.body?.let { body -> productLiveData.postValue(body.results) }
                 errorCode.value = null
             } else {
                 errorCode.value = response.httpCode

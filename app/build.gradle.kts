@@ -42,7 +42,13 @@ android {
 }
 
 dependencies {
-
+    //Coroutines
+    implementation (libs.kotlinx.coroutines.android)
+    //Test
+    androidTestImplementation (libs.androidx.espresso.core)
+    testImplementation (libs.kotlinx.coroutines.test)
+    testImplementation (libs.mockk)
+    testImplementation (libs.androidx.core.testing)
     //Glide
     implementation (libs.glide)
     //Retrofit

@@ -1,7 +1,7 @@
 package com.meli.challenge.domain
 
 import com.meli.challenge.data.ProductRepository
-import com.meli.challenge.data.model.Product
+import com.meli.challenge.data.model.ProductResponse
 import com.meli.challenge.data.network.ApiResponse
 import java.io.IOException
 import java.net.HttpURLConnection
@@ -20,7 +20,7 @@ class GetProductsUseCase @Inject constructor(private val repository: ProductRepo
      * @param nameProduct Nombre del producto para buscar.
      * @return Una [ApiResponse] que contiene una lista de productos o un mensaje de error.
      */
-    suspend operator fun invoke(nameProduct: String): ApiResponse<ArrayList<Product>> {
+    suspend operator fun invoke(nameProduct: String): ApiResponse<ProductResponse> {
         try {
             // Llamar al método del repositorio para obtener productos.
             val response = repository.getProducts(nameProduct)
@@ -31,10 +31,7 @@ class GetProductsUseCase @Inject constructor(private val repository: ProductRepo
 
                 // Verificar si el cuerpo de la respuesta no es null.
                 if (body != null) {
-                    return ApiResponse(
-                        httpCode = response.code(),
-                        body = body.results
-                    )
+                    return ApiResponse(body = body)
                 }
             }
             // Crear una respuesta de error con el mensaje de la respuesta y el código HTTP.
