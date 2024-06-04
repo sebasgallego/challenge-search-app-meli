@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/productFragment"
         android:name="com.meli.challenge.ui.product.ProductFragment"
-        android:label="fragment_product"
+        android:label="@string/product_fragment_name"
         tools:layout="@layout/fragment_product" >
         <argument
             android:name="name"

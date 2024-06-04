@@ -7,10 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.meli.challenge.data.model.Product
 import com.meli.challenge.databinding.ListItemProductBinding
 
+/**
+ * Adaptador para la lista de productos en la pantalla de productos.
+ */
 class ProductAdapter : RecyclerView.Adapter<ProductViewHolder>() {
 
     private var itemList: MutableList<Product> = ArrayList()
 
+    /**
+     * Crea y devuelve un nuevo ViewHolder.
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val binding: ListItemProductBinding =
             ListItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -18,7 +24,7 @@ class ProductAdapter : RecyclerView.Adapter<ProductViewHolder>() {
     }
 
     /**
-     * on Bind ViewHolder
+     * Enlaza los datos de un producto con el ViewHolder.
      */
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val item = itemList[position]
@@ -26,7 +32,7 @@ class ProductAdapter : RecyclerView.Adapter<ProductViewHolder>() {
     }
 
     /**
-     * new Items
+     * Reemplaza la lista de productos con una nueva lista y notifica el cambio.
      */
     @SuppressLint("NotifyDataSetChanged")
     fun newItems(items: MutableList<Product>) {
@@ -36,7 +42,7 @@ class ProductAdapter : RecyclerView.Adapter<ProductViewHolder>() {
     }
 
     /**
-     * get Item Count
+     * Obtiene el número total de elementos en la lista.
      */
     override fun getItemCount(): Int = itemList.size
 }

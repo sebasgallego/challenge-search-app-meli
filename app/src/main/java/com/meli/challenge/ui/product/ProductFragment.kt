@@ -11,13 +11,14 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.meli.challenge.databinding.FragmentProductBinding
 import com.meli.challenge.ui.product.adapter.ProductAdapter
+import com.meli.challenge.utils.ViewHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ProductFragment : Fragment() {
 
     private val viewModel: ProductViewModel by viewModels()
-    private val args : ProductFragmentArgs by navArgs()
+    private val args: ProductFragmentArgs by navArgs()
     private lateinit var binding: FragmentProductBinding
     private lateinit var adapter: ProductAdapter
 
@@ -35,9 +36,11 @@ class ProductFragment : Fragment() {
         initRecyclerView()
         setupObservers()
         findProducts()
+        onClickRetry()
     }
 
-    private fun findProducts(){
+
+    private fun findProducts() {
         val nameProduct = args.name
         viewModel.getProducts(nameProduct)
     }
@@ -47,17 +50,29 @@ class ProductFragment : Fragment() {
      */
     private fun setupObservers() {
 
-        //Observe loading when get list products
         viewModel.loading.observe(viewLifecycleOwner) {
             binding.progressBar.isVisible = it
         }
 
-        //Observe get list cats
         viewModel.productLiveData.observe(viewLifecycleOwner) { dataResponse ->
             if (dataResponse!!.size > 0) {
                 adapter.newItems(ArrayList(dataResponse))
-            }else{
+                binding.layoutRetry.isVisible = false
+                binding.layoutEmpty.isVisible = false
+            } else {
                 binding.layoutEmpty.isVisible = true
+                binding.layoutRetry.isVisible = false
+            }
+        }
+
+        viewModel.errorCode.observe(viewLifecycleOwner) { responseCode ->
+            if (responseCode != null) {
+               val errorMessage = ViewHelper(requireActivity()).processMsgError(
+                    responseCode
+                )
+                binding.layoutRetry.isVisible = true
+                binding.textViewRetry.text = errorMessage
+                binding.layoutEmpty.isVisible = false
             }
         }
     }
@@ -69,5 +84,11 @@ class ProductFragment : Fragment() {
         adapter = ProductAdapter()
         binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
         binding.recyclerView.adapter = adapter
+    }
+
+    private fun onClickRetry() {
+        binding.textViewActionRetry.setOnClickListener {
+            findProducts()
+        }
     }
 }

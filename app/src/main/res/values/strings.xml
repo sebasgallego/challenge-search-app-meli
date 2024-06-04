@@ -1,14 +1,15 @@
 <resources>
     //App
     <string name="app_name">Challenge</string>
-    <string name="error_internet">No se pudo establecer una conexión a Internet, inténtelo de nuevon</string>
+    <string name="error_internet">Parece que no hay internet. Revisa tu conexión para seguir navegando</string>
     <string name="error_server">Parece que algo salio mal, estamos trabajando para solucionarlo</string>
     <string name="lbl_retry">Reintentar</string>
     //Search fragment
     <string name="search_edit">Buscar en Mercado Libre</string>
     <string name="search">Buscar</string>
     <string name="lbl_validate_text">"Debe ingresar un nombre valido"</string>
-    //List item product
+    //Product fragment
+    <string name="product_fragment_name">Listado de productos</string>
     <string name="lbl_available">Disponible:</string>
     <string name="empty_data_title">No encontramos publicaciones</string>
     <string name="empty_data">Revisa que la palabra esté bien escrita. Tambien puedes probar con menos términos o más generales</string>

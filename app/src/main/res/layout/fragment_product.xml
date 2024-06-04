@@ -10,6 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
@@ -81,6 +86,7 @@
                 android:textSize="@dimen/size_title" />
 
             <TextView
+                android:id="@+id/textView_action_retry"
                 android:layout_width="150dp"
                 android:layout_height="36dp"
                 android:layout_marginTop="@dimen/size_20"
@@ -91,11 +97,6 @@
                 android:textColor="@color/white" />
 
         </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
