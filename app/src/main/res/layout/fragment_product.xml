@@ -19,6 +19,79 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="0dp" />
 
+        <LinearLayout
+            android:id="@+id/layout_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/large_dimen"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_warning"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="@dimen/size_12"
+                android:text="@string/empty_data_title"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="@dimen/size_12"
+                android:text="@string/empty_data"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sub_title_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_retry"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/size_20"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_warning"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/textView_retry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_20"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_title" />
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="@dimen/size_20"
+                android:background="@drawable/ic_rounded_corner"
+                android:backgroundTint="@color/blue"
+                android:gravity="center"
+                android:text="@string/lbl_retry"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"

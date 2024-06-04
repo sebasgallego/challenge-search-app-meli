@@ -57,7 +57,7 @@ class ProductFragment : Fragment() {
             if (dataResponse!!.size > 0) {
                 adapter.newItems(ArrayList(dataResponse))
             }else{
-
+                binding.layoutEmpty.isVisible = true
             }
         }
     }
