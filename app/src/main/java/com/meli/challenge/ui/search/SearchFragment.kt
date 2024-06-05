@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.meli.challenge.R
 import com.meli.challenge.databinding.FragmentSearchBinding
 
 /**
@@ -42,11 +44,7 @@ class SearchFragment : Fragment() {
      */
     fun gotoSearchProduct() {
         val nameProduct = binding.editTextSearch.text.toString()
-        // Navegar al fragmento de productos con el nombre del producto.
-        findNavController().navigate(
-            SearchFragmentDirections.actionSearchFragmentToProductFragment(name = nameProduct)
-        )
-        /*if (nameProduct.isEmpty()) {
+        if (nameProduct.isEmpty()) {
             // Mostrar mensaje de validación si el campo de búsqueda está vacío.
             Toast.makeText(context, getString(R.string.lbl_validate_text), Toast.LENGTH_SHORT).show()
         } else {
@@ -54,7 +52,7 @@ class SearchFragment : Fragment() {
             findNavController().navigate(
                 SearchFragmentDirections.actionSearchFragmentToProductFragment(name = nameProduct)
             )
-        }*/
+        }
     }
 
     /**
