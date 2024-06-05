@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "974261931866",
+    "project_id": "duo-app-6d702",
+    "storage_bucket": "duo-app-6d702.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:974261931866:android:566818766ef030e3ba6d63",
+        "android_client_info": {
+          "package_name": "com.duo.duo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "974261931866-hh8pg8bkdl2mfuv0lbhjan7b378kalq7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKFZnxYC7jh5dCSjjslDevJh2oyXUPxww"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "974261931866-hh8pg8bkdl2mfuv0lbhjan7b378kalq7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "974261931866-f1lq4bb19g1r1n32f971buqqke4bn8k7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.duo.duo"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:974261931866:android:36e61675bb68de20ba6d63",
+        "android_client_info": {
+          "package_name": "com.meli.challenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "974261931866-hh8pg8bkdl2mfuv0lbhjan7b378kalq7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKFZnxYC7jh5dCSjjslDevJh2oyXUPxww"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "974261931866-hh8pg8bkdl2mfuv0lbhjan7b378kalq7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "974261931866-f1lq4bb19g1r1n32f971buqqke4bn8k7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.duo.duo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
