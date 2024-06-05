@@ -46,6 +46,8 @@ android {
 dependencies {
     //Coroutines
     implementation (libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.fragment.testing)
+    implementation(libs.androidx.junit.ktx)
     //Test
     androidTestImplementation (libs.androidx.espresso.core)
     testImplementation (libs.kotlinx.coroutines.test)

@@ -30,19 +30,6 @@
                 android:layout_height="wrap_content"
                 android:text='@{product.getItemAttributes(attributeType.ITEM_CONDITION.toString())}' />
 
-            <View
-                android:id="@+id/divider"
-                style="@style/Widget.Challenge.Divider"
-                android:layout_width="2dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/small_dimen"
-                android:layout_marginEnd="@dimen/small_dimen" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{@string/sold_quantity(product.soldQuantity)}" />
-
         </LinearLayout>
 
         <LinearLayout

@@ -16,7 +16,6 @@
     //Detail fragment
     <string name="detail_fragment_name">Detalle de producto</string>
     <string name="results">Resultados %s</string>
-    <string name="sold_quantity">+ %s vendidos</string>
     <string name="available">%s disponibles</string>
     <string name="total">Total $ %s</string>
     <string name="installments">o %s x $ %s</string>

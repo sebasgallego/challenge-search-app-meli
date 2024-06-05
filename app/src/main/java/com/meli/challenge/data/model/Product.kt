@@ -1,9 +1,8 @@
 package com.meli.challenge.data.model
 
-import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import com.meli.challenge.utils.NumberHelper
-import kotlinx.parcelize.Parceler
 import kotlinx.parcelize.Parcelize
 
 /**
@@ -19,59 +18,33 @@ import kotlinx.parcelize.Parcelize
  * @property attributes Lista de atributos del producto.
  */
 
-/**
- * Obtiene el valor de un atributo específico del producto.
- *
- * @param type Tipo de atributo a buscar.
- * @return El valor del atributo si se encuentra, de lo contrario una cadena vacía.
- */
-
 @Parcelize
 data class Product(
     val id: String,
     val title: String,
     val thumbnail: String,
     val price: Double,
+    @SerializedName("available_quantity")
     val availableQuantity: Int,
-    val soldQuantity: Int,
     val installments: Installment?,
     val attributes: List<Attribute>?,
 ) : Parcelable {
-    constructor(parcel: Parcel) : this(
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
-        parcel.readDouble(),
-        parcel.readInt(),
-        parcel.readInt(),
-        parcel.readParcelable(Installment::class.java.classLoader),
-        parcel.createTypedArrayList(Attribute),
-    )
 
-    companion object : Parceler<Product> {
-
-        override fun Product.write(parcel: Parcel, flags: Int) {
-            parcel.writeString(id)
-            parcel.writeString(title)
-            parcel.writeString(thumbnail)
-            parcel.writeDouble(price)
-            parcel.writeInt(availableQuantity)
-            parcel.writeInt(soldQuantity)
-            parcel.writeParcelable(installments, flags)
-            parcel.writeTypedList(attributes)
-        }
-
-        override fun create(parcel: Parcel): Product {
-            return Product(parcel)
-        }
-    }
-
+    /**
+     * Obtiene el valor de un atributo específico del producto basado en su tipo.
+     *
+     * @param type El tipo del atributo que se desea obtener.
+     * @return El valor del atributo como una cadena de texto.
+     */
     fun getItemAttributes(type: String): String {
         var value = ""
+        // Verificar si la lista de atributos no es nula
         attributes?.let {
+            // Iterar a través de los atributos para encontrar el que coincide con el tipo dado
             for (item: Attribute in it) {
                 if (type == item.id) {
-                    value = item.valueName!!
+                    // Asignar el valor del atributo y salir del bucle
+                    value = item.valueName ?: ""
                     break
                 }
             }
@@ -79,8 +52,14 @@ data class Product(
         return value
     }
 
-    fun getPriceFormat(price:Double): String? {
-        return  NumberHelper().parseAmountToCOP(price)
+    /**
+     * Formatea el precio a la moneda colombiana (COP).
+     *
+     * @param price El precio a formatear.
+     * @return El precio formateado como una cadena de texto.
+     */
+    fun getPriceFormat(price: Double): String? {
+        return NumberHelper().parseAmountToCOP(price)
     }
 
 }

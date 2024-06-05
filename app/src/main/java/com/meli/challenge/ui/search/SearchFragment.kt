@@ -5,10 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.meli.challenge.R
 import com.meli.challenge.databinding.FragmentSearchBinding
 
 /**
@@ -42,9 +40,13 @@ class SearchFragment : Fragment() {
     /**
      * Navega al fragmento de productos si el campo de búsqueda no está vacío.
      */
-    private fun gotoSearchProduct() {
+    fun gotoSearchProduct() {
         val nameProduct = binding.editTextSearch.text.toString()
-        if (nameProduct.isEmpty()) {
+        // Navegar al fragmento de productos con el nombre del producto.
+        findNavController().navigate(
+            SearchFragmentDirections.actionSearchFragmentToProductFragment(name = nameProduct)
+        )
+        /*if (nameProduct.isEmpty()) {
             // Mostrar mensaje de validación si el campo de búsqueda está vacío.
             Toast.makeText(context, getString(R.string.lbl_validate_text), Toast.LENGTH_SHORT).show()
         } else {
@@ -52,7 +54,7 @@ class SearchFragment : Fragment() {
             findNavController().navigate(
                 SearchFragmentDirections.actionSearchFragmentToProductFragment(name = nameProduct)
             )
-        }
+        }*/
     }
 
     /**
@@ -61,16 +63,23 @@ class SearchFragment : Fragment() {
     private fun setupListeners() {
         setupSearchClickListener()
         setupClearClickListener()
+        setupSearchEditActionClickListener()
     }
 
     /**
-     * Configura el listener para el botón de búsqueda y el botón de acción de teclado.
+     * Configura el listener para el botón de búsqueda.
      */
-    private fun setupSearchClickListener() {
+    fun setupSearchClickListener() {
         //Listener para el botón de búsqueda.
         binding.textViewSearch.setOnClickListener {
             gotoSearchProduct()
         }
+    }
+
+    /**
+     * Configura el listener para el botón de acción de teclado.
+     */
+    fun setupSearchEditActionClickListener() {
         //listener para el botón de acción de teclado.
         binding.editTextSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -84,7 +93,7 @@ class SearchFragment : Fragment() {
      * Configura el listener para el botón de limpiar.
      * Limpia el texto del campo de búsqueda.
      */
-    private fun setupClearClickListener() {
+    fun setupClearClickListener() {
         binding.imageViewClear.setOnClickListener {
             binding.editTextSearch.setText("")
         }
