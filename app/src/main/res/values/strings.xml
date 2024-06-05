@@ -4,13 +4,23 @@
     <string name="error_internet">Parece que no hay internet. Revisa tu conexión para seguir navegando</string>
     <string name="error_server">Parece que algo salio mal, estamos trabajando para solucionarlo</string>
     <string name="lbl_retry">Reintentar</string>
+    <string name="lbl_available">Disponible:</string>
     //Search fragment
     <string name="search_edit">Buscar en Mercado Libre</string>
     <string name="search">Buscar</string>
     <string name="lbl_validate_text">"Debe ingresar un nombre valido"</string>
     //Product fragment
     <string name="product_fragment_name">Listado de productos</string>
-    <string name="lbl_available">Disponible:</string>
     <string name="empty_data_title">No encontramos publicaciones</string>
     <string name="empty_data">Revisa que la palabra esté bien escrita. Tambien puedes probar con menos términos o más generales</string>
+    //Detail fragment
+    <string name="detail_fragment_name">Detalle de producto</string>
+    <string name="results">Resultados %s</string>
+    <string name="sold_quantity">+ %s vendidos</string>
+    <string name="available">%s disponibles</string>
+    <string name="total">Total $ %s</string>
+    <string name="installments">o %s x $ %s</string>
+    <string name="brand">Marca: %s</string>
+    <string name="line">Línea: %s</string>
+    <string name="model">Modelo: %s, %s</string>
 </resources>

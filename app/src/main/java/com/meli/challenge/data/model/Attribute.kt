@@ -1,5 +1,7 @@
 package com.meli.challenge.data.model
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -8,12 +10,36 @@ import com.google.gson.annotations.SerializedName
  * @property id Identificador del atributo.
  * @property valueName Nombre del valor del atributo.
  */
-class Attribute {
-
-    var id: String = ""
-
+data class Attribute (
+    var id: String?,
     @SerializedName("value_name")
-    var valueName: String = ""
+    var valueName: String? ,
+): Parcelable{
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString()
+    ) {
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(id)
+        parcel.writeString(valueName)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Attribute> {
+        override fun createFromParcel(parcel: Parcel): Attribute {
+            return Attribute(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Attribute?> {
+            return arrayOfNulls(size)
+        }
+    }
+
 }
 
 /**

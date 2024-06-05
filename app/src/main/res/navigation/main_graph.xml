@@ -24,6 +24,19 @@
             android:name="name"
             app:argType="string"
             android:defaultValue="Guest" />
+        <action
+            android:id="@+id/action_productFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.meli.challenge.ui.product.detail.DetailFragment"
+        android:label="@string/detail_fragment_name"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="product"
+            app:argType="com.meli.challenge.data.model.Product"  />
     </fragment>
 
 </navigation >

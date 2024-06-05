@@ -10,9 +10,15 @@ import com.meli.challenge.databinding.ListItemProductBinding
 /**
  * Adaptador para la lista de productos en la pantalla de productos.
  */
-class ProductAdapter : RecyclerView.Adapter<ProductViewHolder>() {
+class ProductAdapter(
+    private val listener: ProductItemListener
+) : RecyclerView.Adapter<ProductViewHolder>() {
 
     private var itemList: MutableList<Product> = ArrayList()
+
+    interface ProductItemListener {
+        fun onClickedProduct(product: Product)
+    }
 
     /**
      * Crea y devuelve un nuevo ViewHolder.
@@ -20,7 +26,7 @@ class ProductAdapter : RecyclerView.Adapter<ProductViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val binding: ListItemProductBinding =
             ListItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ProductViewHolder(binding)
+        return ProductViewHolder(binding,listener)
     }
 
     /**

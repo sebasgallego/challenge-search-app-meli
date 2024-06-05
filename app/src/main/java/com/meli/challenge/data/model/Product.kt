@@ -1,6 +1,10 @@
 package com.meli.challenge.data.model
 
-import com.google.gson.annotations.SerializedName
+import android.os.Parcel
+import android.os.Parcelable
+import com.meli.challenge.utils.NumberHelper
+import kotlinx.parcelize.Parceler
+import kotlinx.parcelize.Parcelize
 
 /**
  * Clase que representa un producto.
@@ -14,38 +18,69 @@ import com.google.gson.annotations.SerializedName
  * @property installments Información sobre las cuotas de financiamiento del producto.
  * @property attributes Lista de atributos del producto.
  */
-class Product {
 
-    var id: String = ""
-    var title: String = ""
-    var thumbnail: String = ""
-    var price: Double = 0.0
+/**
+ * Obtiene el valor de un atributo específico del producto.
+ *
+ * @param type Tipo de atributo a buscar.
+ * @return El valor del atributo si se encuentra, de lo contrario una cadena vacía.
+ */
 
-    @SerializedName("available_quantity")
-    var availableQuantity: Int = 0
+@Parcelize
+data class Product(
+    val id: String,
+    val title: String,
+    val thumbnail: String,
+    val price: Double,
+    val availableQuantity: Int,
+    val soldQuantity: Int,
+    val installments: Installment?,
+    val attributes: List<Attribute>?,
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readDouble(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readParcelable(Installment::class.java.classLoader),
+        parcel.createTypedArrayList(Attribute),
+    )
 
-    @SerializedName("sold_quantity")
-    var soldQuantity: Int = 0
+    companion object : Parceler<Product> {
 
-    var installments: Installment? = null
-    private var attributes: ArrayList<Attribute>? = null
+        override fun Product.write(parcel: Parcel, flags: Int) {
+            parcel.writeString(id)
+            parcel.writeString(title)
+            parcel.writeString(thumbnail)
+            parcel.writeDouble(price)
+            parcel.writeInt(availableQuantity)
+            parcel.writeInt(soldQuantity)
+            parcel.writeParcelable(installments, flags)
+            parcel.writeTypedList(attributes)
+        }
 
-    /**
-     * Obtiene el valor de un atributo específico del producto.
-     *
-     * @param type Tipo de atributo a buscar.
-     * @return El valor del atributo si se encuentra, de lo contrario una cadena vacía.
-     */
+        override fun create(parcel: Parcel): Product {
+            return Product(parcel)
+        }
+    }
+
     fun getItemAttributes(type: String): String {
         var value = ""
         attributes?.let {
             for (item: Attribute in it) {
                 if (type == item.id) {
-                    value = item.valueName
+                    value = item.valueName!!
                     break
                 }
             }
         }
         return value
     }
+
+    fun getPriceFormat(price:Double): String? {
+        return  NumberHelper().parseAmountToCOP(price)
+    }
+
 }

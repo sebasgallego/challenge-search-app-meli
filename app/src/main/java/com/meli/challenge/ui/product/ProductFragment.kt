@@ -7,17 +7,20 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
+import com.meli.challenge.data.model.Product
 import com.meli.challenge.databinding.FragmentProductBinding
 import com.meli.challenge.ui.product.adapter.ProductAdapter
 import com.meli.challenge.utils.ViewHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProductFragment : Fragment() {
+class ProductFragment : Fragment(), ProductAdapter.ProductItemListener {
 
-    private val viewModel: ProductViewModel by viewModels()
+    //Owner view model
+    private val productViewModel: ProductViewModel by  viewModels()
     private val args: ProductFragmentArgs by navArgs()
     private lateinit var binding: FragmentProductBinding
     private lateinit var adapter: ProductAdapter
@@ -41,8 +44,10 @@ class ProductFragment : Fragment() {
 
 
     private fun findProducts() {
-        val nameProduct = args.name
-        viewModel.getProducts(nameProduct)
+        if (!productViewModel.isSuccess){
+            val nameProduct = args.name
+            productViewModel.getProducts(nameProduct)
+        }
     }
 
     /**
@@ -50,11 +55,11 @@ class ProductFragment : Fragment() {
      */
     private fun setupObservers() {
 
-        viewModel.loading.observe(viewLifecycleOwner) {
-            binding.progressBar.isVisible = it
+        productViewModel.loading.observe(viewLifecycleOwner) { isVisible ->
+            binding.progressBar.isVisible = isVisible
         }
 
-        viewModel.productLiveData.observe(viewLifecycleOwner) { dataResponse ->
+        productViewModel.productLiveData.observe(viewLifecycleOwner) { dataResponse ->
             if (dataResponse!!.size > 0) {
                 adapter.newItems(ArrayList(dataResponse))
                 binding.layoutRetry.isVisible = false
@@ -65,7 +70,7 @@ class ProductFragment : Fragment() {
             }
         }
 
-        viewModel.errorCode.observe(viewLifecycleOwner) { responseCode ->
+        productViewModel.errorCode.observe(viewLifecycleOwner) { responseCode ->
             if (responseCode != null) {
                val errorMessage = ViewHelper(requireActivity()).processMsgError(
                     responseCode
@@ -81,14 +86,24 @@ class ProductFragment : Fragment() {
      * init Recycler View
      */
     private fun initRecyclerView() {
-        adapter = ProductAdapter()
+        adapter = ProductAdapter(this)
         binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
         binding.recyclerView.adapter = adapter
     }
 
     private fun onClickRetry() {
-        binding.textViewActionRetry.setOnClickListener {
+        binding.textViewActionRetry.setOnClickListener {_->
             findProducts()
         }
     }
+
+    private fun goToNextScreen(product: Product) {
+        val action = ProductFragmentDirections.actionProductFragmentToDetailFragment(product)
+        findNavController().navigate(action)
+    }
+
+    override fun onClickedProduct(product: Product) {
+        goToNextScreen(product)
+    }
+
 }

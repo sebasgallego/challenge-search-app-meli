@@ -1,6 +1,9 @@
 package com.meli.challenge.utils
 
 import android.app.Activity
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.meli.challenge.R
 import java.net.HttpURLConnection.HTTP_UNAVAILABLE
 
@@ -10,6 +13,20 @@ import java.net.HttpURLConnection.HTTP_UNAVAILABLE
  * @param activity La actividad asociada.
  */
 class ViewHelper(activity: Activity) {
+
+    companion object {
+        @JvmStatic
+        @BindingAdapter("glideSrc")
+        fun loadImage(
+            view: ImageView,
+            url: String
+        ) { // This methods should not have any return type, = declaration would make it return that object declaration.
+            Glide.with(view.context)
+                .load(url)
+                .circleCrop()
+                .into(view)
+        }
+    }
 
     // La actividad asociada.
     private var mActivity: Activity? = activity
@@ -35,4 +52,5 @@ class ViewHelper(activity: Activity) {
             }
         }
     }
+
 }
